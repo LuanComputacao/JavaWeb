@@ -7,12 +7,20 @@ package org.ufpr.sistemapedidos.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Collection;
+import java.util.Date;
+import java.util.HashSet;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.ufpr.sistemapedidos.model.Cliente;
+import org.ufpr.sistemapedidos.model.ItemDoPedido;
+import org.ufpr.sistemapedidos.model.Pedido;
+import org.ufpr.sistemapedidos.model.Produto;
 import org.ufpr.sistemapedidos.model.dao.ClienteDAO;
+import org.ufpr.sistemapedidos.model.dao.ItemDoPedidoDAO;
+import org.ufpr.sistemapedidos.model.dao.ProdutoDAO;
 
 /**
  *
@@ -37,14 +45,37 @@ public class Index extends HttpServlet {
         cliente.setCpf("00000000000");
         cliente.setNome("Luan Roger");
         cliente.setSobrenome("Santana");
+        System.out.println(cliente.getId());
         clienteDao.persist(cliente);
-        
+
+        ProdutoDAO produtoDao = new ProdutoDAO();
+        Produto produto = new Produto();
+        produto.setDescricao("Lápis B2");
+        produtoDao.persist(produto);
+
+        Produto produto2 = new Produto();
+        produto2.setDescricao("Lápis B6");
+        produtoDao.persist(produto2);
+
+        ItemDoPedidoDAO itemDoPedidoDao = new ItemDoPedidoDAO();
+        ItemDoPedido itemDoPedido = new ItemDoPedido();
+        itemDoPedido.setProduto(produto);
+        itemDoPedidoDao.persist(itemDoPedido);
+        Collection<ItemDoPedido> itemDoPedidoCollection = new HashSet<>();
+        boolean addedItemDoPedido = itemDoPedidoCollection.add(itemDoPedido);
+
+        Pedido pedido = new Pedido();
+        pedido.setCliente(cliente);
+        pedido.setDataPedido(new Date());
+        pedido.setItemDoPedidoCollection(itemDoPedidoCollection);
+
+
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet Index</title>");            
+            out.println("<title>Servlet Index</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet Index at " + request.getContextPath() + "</h1>");
