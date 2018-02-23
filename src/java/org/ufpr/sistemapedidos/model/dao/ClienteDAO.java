@@ -5,8 +5,8 @@
  */
 package org.ufpr.sistemapedidos.model.dao;
 
+import java.util.List;
 import javax.persistence.EntityManager;
-import javax.persistence.NoResultException;
 import javax.persistence.TypedQuery;
 import org.ufpr.sistemapedidos.model.Cliente;
 import org.ufpr.sistemapedidos.utils.JpaUtil;
@@ -54,6 +54,24 @@ public class ClienteDAO {
         }
     }
 
+    public List consultarTodos() {
+        EntityManager entityManager = JpaUtil.getEntityManager();
+
+        List <Cliente> clientes = null;
+        try {
+            TypedQuery<Cliente> query = entityManager.createNamedQuery("Cliente.findAll", Cliente.class);
+            clientes = query.getResultList();
+        } catch (Exception e) {
+            clientes = null;
+        } finally {
+            if (entityManager.isOpen()) {
+                entityManager.close();
+            }
+        }
+
+        return clientes;
+    }
+    
     public Cliente consultarPorId(Long id) {
         EntityManager entityManager = JpaUtil.getEntityManager();
 
@@ -62,6 +80,8 @@ public class ClienteDAO {
             TypedQuery<Cliente> query = entityManager.createNamedQuery("Cliente.findById", Cliente.class);
             query.setParameter("id", id);
             cliente = query.getSingleResult();
+        } catch (Exception e) {
+            cliente = null;
         } finally {
             if (entityManager.isOpen()) {
                 entityManager.close();

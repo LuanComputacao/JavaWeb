@@ -27,7 +27,6 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "ItemDoPedido.findAll", query = "SELECT i FROM ItemDoPedido i"),
-    @NamedQuery(name = "ItemDoPedido.findByQtdade", query = "SELECT i FROM ItemDoPedido i WHERE i.qtdade = :qtdade"),
     @NamedQuery(name = "ItemDoPedido.findByIdPedido", query = "SELECT i FROM ItemDoPedido i WHERE i.itemDoPedidoPK.idPedido = :idPedido"),
     @NamedQuery(name = "ItemDoPedido.findByIdProduto", query = "SELECT i FROM ItemDoPedido i WHERE i.itemDoPedidoPK.idProduto = :idProduto")})
 public class ItemDoPedido implements Serializable {

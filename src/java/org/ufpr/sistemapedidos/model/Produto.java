@@ -30,8 +30,7 @@ import javax.xml.bind.annotation.XmlTransient;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Produto.findAll", query = "SELECT p FROM Produto p"),
-    @NamedQuery(name = "Produto.findById", query = "SELECT p FROM Produto p WHERE p.id = :id"),
-    @NamedQuery(name = "Produto.findByDescricao", query = "SELECT p FROM Produto p WHERE p.descricao = :descricao")})
+    @NamedQuery(name = "Produto.findById", query = "SELECT p FROM Produto p WHERE p.id = :id")})
 public class Produto implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -40,11 +39,11 @@ public class Produto implements Serializable {
     @NotNull
     @Column(name = "id", length = 11)
     private Integer id;
-    
+
     @Size(max = 45)
     @Column(name = "descricao", length = 45)
     private String descricao;
-    
+
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "produto")
     private Collection<ItemDoPedido> itemDoPedidoCollection;
 
@@ -104,5 +103,5 @@ public class Produto implements Serializable {
     public String toString() {
         return "org.ufpr.sistemapedidos.model.Produto[ id=" + id + " ]";
     }
-    
+
 }
