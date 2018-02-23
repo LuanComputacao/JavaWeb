@@ -42,14 +42,15 @@ public class Index extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         ClienteDAO clienteDao = new ClienteDAO();
         Cliente cliente;
-//        cliente = new Cliente();
-//        cliente.setCpf("00000000000");
-//        cliente.setNome("Luan Roger");
-//        cliente.setSobrenome("Santana");
-//        clienteDao.salvar(cliente);
-//        System.out.println(cliente.toString());
-        cliente = clienteDao.consultarPorCpf("00000000000");
+        cliente = new Cliente();
+        cliente.setCpf("00000000000");
+        cliente.setNome("Luan Roger");
+        cliente.setSobrenome("Santana");
+        clienteDao.salvar(cliente);
         System.out.println(cliente.toString());
+        cliente = clienteDao.consultarPorCpf("00000000000");
+        if(cliente != null)
+            System.out.println(cliente.toString());
         
 
         try (PrintWriter out = response.getWriter()) {
