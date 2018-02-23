@@ -43,19 +43,19 @@ public class Cliente implements Serializable {
     @Basic(optional = false)
     @Column(name = "id")
     private Integer id;
-    
+
     @Size(max = 11)
-    @Column(name = "cpf")
+    @Column(name = "cpf", unique = true, length = 11)
     private String cpf;
-    
+
     @Size(max = 30)
-    @Column(name = "nome")
+    @Column(name = "nome", length = 30)
     private String nome;
-    
+
     @Size(max = 50)
-    @Column(name = "sobrenome")
+    @Column(name = "sobrenome", length = 50)
     private String sobrenome;
-    
+
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "cliente")
     private Collection<Pedido> pedidoCollection;
 
@@ -129,7 +129,7 @@ public class Cliente implements Serializable {
 
     @Override
     public String toString() {
-        return "org.ufpr.sistemapedidos.model.Cliente[ id=" + id + " ]";
+        return "org.ufpr.sistemapedidos.model.Cliente[ id=" + id + ", cpf=" + cpf + " ]";
     }
-    
+
 }

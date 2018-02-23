@@ -38,11 +38,13 @@ public class Produto implements Serializable {
     @Id
     @Basic(optional = false)
     @NotNull
-    @Column(name = "id")
+    @Column(name = "id", length = 11)
     private Integer id;
+    
     @Size(max = 45)
-    @Column(name = "descricao")
+    @Column(name = "descricao", length = 45)
     private String descricao;
+    
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "produto")
     private Collection<ItemDoPedido> itemDoPedidoCollection;
 
