@@ -22,6 +22,7 @@ public class ItemDoPedidoPK implements Serializable {
     @NotNull
     @Column(name = "id_pedido")
     private int idPedido;
+    
     @Basic(optional = false)
     @NotNull
     @Column(name = "id_produto")
@@ -69,10 +70,7 @@ public class ItemDoPedidoPK implements Serializable {
         if (this.idPedido != other.idPedido) {
             return false;
         }
-        if (this.idProduto != other.idProduto) {
-            return false;
-        }
-        return true;
+        return this.idProduto == other.idProduto;
     }
 
     @Override
