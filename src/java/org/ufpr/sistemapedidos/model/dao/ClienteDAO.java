@@ -6,6 +6,7 @@
 package org.ufpr.sistemapedidos.model.dao;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.TypedQuery;
 import org.ufpr.sistemapedidos.model.Cliente;
 import org.ufpr.sistemapedidos.utils.JpaUtil;
@@ -78,6 +79,8 @@ public class ClienteDAO {
             TypedQuery<Cliente> query = entityManager.createNamedQuery("Cliente.findByCpf", Cliente.class);
             query.setParameter("cpf", cpf);
             cliente = query.getSingleResult();
+        } catch (Exception e) {
+            cliente = null;
         } finally {
             if (entityManager.isOpen()) {
                 entityManager.close();
