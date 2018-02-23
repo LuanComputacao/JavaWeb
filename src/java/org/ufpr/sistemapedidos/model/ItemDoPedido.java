@@ -36,8 +36,8 @@ public class ItemDoPedido implements Serializable {
     @EmbeddedId
     protected ItemDoPedidoPK itemDoPedidoPK;
     
-    @Size(max = 45)
-    @Column(name = "qtdade")
+    @Size(max = 11)
+    @Column(name = "qtdade", length = 11)
     private String qtdade;
    
     @JoinColumns({

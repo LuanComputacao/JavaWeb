@@ -41,34 +41,16 @@ public class Index extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         ClienteDAO clienteDao = new ClienteDAO();
-        Cliente cliente = new Cliente();
-        cliente.setCpf("00000000000");
-        cliente.setNome("Luan Roger");
-        cliente.setSobrenome("Santana");
-        System.out.println(cliente.getId());
-        clienteDao.persist(cliente);
-
-        ProdutoDAO produtoDao = new ProdutoDAO();
-        Produto produto = new Produto();
-        produto.setDescricao("Lápis B2");
-        produtoDao.persist(produto);
-
-        Produto produto2 = new Produto();
-        produto2.setDescricao("Lápis B6");
-        produtoDao.persist(produto2);
-
-        ItemDoPedidoDAO itemDoPedidoDao = new ItemDoPedidoDAO();
-        ItemDoPedido itemDoPedido = new ItemDoPedido();
-        itemDoPedido.setProduto(produto);
-        itemDoPedidoDao.persist(itemDoPedido);
-        Collection<ItemDoPedido> itemDoPedidoCollection = new HashSet<>();
-        boolean addedItemDoPedido = itemDoPedidoCollection.add(itemDoPedido);
-
-        Pedido pedido = new Pedido();
-        pedido.setCliente(cliente);
-        pedido.setDataPedido(new Date());
-        pedido.setItemDoPedidoCollection(itemDoPedidoCollection);
-
+        Cliente cliente;
+//        cliente = new Cliente();
+//        cliente.setCpf("00000000000");
+//        cliente.setNome("Luan Roger");
+//        cliente.setSobrenome("Santana");
+//        clienteDao.salvar(cliente);
+//        System.out.println(cliente.toString());
+        cliente = clienteDao.consultarPorCpf("00000000000");
+        System.out.println(cliente.toString());
+        
 
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
@@ -78,7 +60,8 @@ public class Index extends HttpServlet {
             out.println("<title>Servlet Index</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet Index at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Cliente" + request.getContextPath() + "</h1>");
+            out.println("<ul>");
             out.println("</body>");
             out.println("</html>");
         }
